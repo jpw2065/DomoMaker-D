@@ -11,7 +11,6 @@ var handleLogin = function handleLogin(e) {
     return false;
   }
 
-  console.log($("#input[name=_csrf]").val());
   sendAjax('POST', $("#loginForm").attr("action"), $("#loginForm").serialize(), redirect);
   return false;
 };
@@ -112,7 +111,6 @@ var SignupWindow = function SignupWindow(props) {
 };
 
 var createLoginWindow = function createLoginWindow(csrf) {
-  console.log(csrf);
   ReactDOM.render( /*#__PURE__*/React.createElement(LoginWindow, {
     csrf: csrf
   }), document.querySelector("#content"));
@@ -142,7 +140,6 @@ var setup = function setup(csrf) {
 
 var getToken = function getToken() {
   sendAjax('GET', '/getToken', null, function (result) {
-    console.log(result);
     setup(result.csrfToken);
   });
 };

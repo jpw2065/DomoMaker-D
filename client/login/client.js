@@ -8,8 +8,6 @@ const handleLogin = (e) => {
         return false;
     }
 
-    console.log($("#input[name=_csrf]").val());
-
     sendAjax('POST', $("#loginForm").attr("action"), $("#loginForm").serialize(), redirect);
 
     return false;
@@ -83,7 +81,6 @@ const SignupWindow = (props) => {
 
 
 const createLoginWindow = (csrf) => {
-    console.log(csrf);
     ReactDOM.render(
         <LoginWindow csrf={csrf} />,
         document.querySelector("#content")
@@ -118,7 +115,6 @@ const setup = (csrf) => {
 
 const getToken = () => {
     sendAjax('GET', '/getToken', null, (result) => {
-        console.log(result);
         setup(result.csrfToken);
     });
 };
