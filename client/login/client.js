@@ -3,7 +3,7 @@ const handleLogin = (e) => {
 
     $("#domoMessage").animate({width: 'hide'}, 350);
 
-    if($("#user").val() = '' || $("#pass").val() == ''){
+    if($("#user").val() == '' || $("#pass").val() == ''){
         handleError("RAWR! Username or password is empty");
         return false;
     }
@@ -22,7 +22,7 @@ const handleSignup = (e) => {
     $("#domoMessage").animate({width: 'hide'}, 350);
 
 
-    if($("#user").val() = '' || $("#pass").val() == '' || $("#pass2").val() == ''){
+    if($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == ''){
         handleError("RAWR! All fields are required");
         return false;
     }
@@ -83,6 +83,7 @@ const SignupWindow = (props) => {
 
 
 const createLoginWindow = (csrf) => {
+    console.log(csrf);
     ReactDOM.render(
         <LoginWindow csrf={csrf} />,
         document.querySelector("#content")
@@ -117,6 +118,7 @@ const setup = (csrf) => {
 
 const getToken = () => {
     sendAjax('GET', '/getToken', null, (result) => {
+        console.log(result);
         setup(result.csrfToken);
     });
 };

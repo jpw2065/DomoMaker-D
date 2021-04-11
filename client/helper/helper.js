@@ -1,14 +1,12 @@
 const handleError = (message) => {
     $("#errorMessage").text(message);
-    $("domoMessage").animate({width: 'toggle'}, 350);
+    $("#domoMessage").animate({width: 'toggle'}, 350);
 }
 
-const redirect = (message) => {
-    $("domoMessage").animate({width: 'toggle'}, 350);
+const redirect = (response) => {
+    $("#domoMessage").animate({width: 'toggle'}, 350);
     window.location = response.redirect;
 }
-
-
 
 const sendAjax = (type, action, data, success) => {
     $.ajax({
@@ -19,7 +17,7 @@ const sendAjax = (type, action, data, success) => {
         dataType: "json",
         success: success,
         error: function(xhr, status, error) {
-            var messageObj = JOSN.parse(xhr.responseText);
+            var messageObj = JSON.parse(xhr.responseText);
             handleError(messageObj.error);
         }
     })

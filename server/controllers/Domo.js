@@ -9,7 +9,7 @@ const makerPage = (req, res) => {
       return res.status(400).json({ error: 'An error occured' });
     }
 
-    return res.render('app', { domos: docs });
+    return res.render('app', { csrfToken: req.csrfToken(), domos: docs });
   });
 };
 
@@ -44,16 +44,14 @@ const makeDomo = (req, res) => {
 };
 
 
-const getDomos = (req, res) => {
-  return Domo.DomoModel.findByOwner(req.session.account._id, (err, docs) => {
-    if(err) {
-      console.log(err);
-      return res.status(400).json({ error: 'An error occurred' });
-    }
+const getDomos = (req, res) => Domo.DomoModel.findByOwner(req.session.account._id, (err, docs) => {
+  if (err) {
+    console.log(err);
+    return res.status(400).json({ error: 'An error occurred' });
+  }
 
-    return res.json({ domos: docs });
-  })
-}
+  return res.json({ domos: docs });
+});
 
 
 module.exports.makerPage = makerPage;
